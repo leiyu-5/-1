@@ -1,0 +1,771 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* 设置字体和背景 */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    /* 主容器样式 */
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 主卡片样式 */
+.main-card {
+    /* 主卡片容器 */
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* 标题样式 */
+h1 {
+    /* 页面主标题 */
+    text-align: center;
+    font-size: 2.8rem;
+    font-weight: 700;
+    padding: 40px 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    margin: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 可视化看板样式 */
+.dashboard {
+    /* 看板容器 */
+    display: flex;
+    background: #f8f9fa;
+    padding: 30px;
+    border-bottom: 1px solid #e9ecef;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.dashboard-item {
+    /* 看板项目 */
+    flex: 1;
+    min-width: 220px;
+    text-align: center;
+    padding: 30px 20px;
+    background: white;
+    margin: 0 10px 15px 10px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-item::before {
+    /* 看板项目顶部装饰条 */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+}
+
+.dashboard-item:hover {
+    /* 看板项目悬停效果 */
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-value {
+    /* 看板数值 */
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.dashboard-item:hover .dashboard-value {
+    /* 看板数值悬停效果 */
+    transform: scale(1.05);
+}
+
+/* 不同看板项目的颜色 */
+#total-tasks {
+    /* 总任务数量颜色 */
+    color: #667eea;
+}
+
+#scheduled-tasks {
+    /* 已排任务数量颜色 */
+    color: #27ae60;
+}
+
+#unscheduled-tasks {
+    /* 未排任务数量颜色 */
+    color: #f39c12;
+}
+
+#available-persons {
+    /* 空余人员数量颜色 */
+    color: #e74c3c;
+}
+
+.dashboard-label {
+    /* 看板标签 */
+    font-size: 1.1rem;
+    color: #7f8c8d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+h2 {
+    /* 二级标题 */
+    color: #34495e;
+    margin: 30px 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid #667eea;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+h3 {
+    /* 三级标题 */
+    color: #5a6c7d;
+    margin: 25px 0 15px;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+/* 标签页样式 */
+.tabs {
+    /* 标签页容器 */
+    display: flex;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.tab-btn {
+    /* 标签按钮 */
+    padding: 20px 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: #666;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.tab-btn:hover {
+    /* 标签按钮悬停效果 */
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+}
+
+.tab-btn.active {
+    /* 激活的标签按钮 */
+    color: #667eea;
+    font-weight: 700;
+}
+
+.tab-btn.active::after {
+    /* 激活标签按钮的下划线 */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    transition: all 0.3s ease;
+}
+
+/* 内容区域样式 */
+.tab-content {
+    /* 标签内容区域 */
+    display: none;
+    padding: 40px;
+}
+
+.tab-content.active {
+    /* 激活的标签内容 */
+    display: block;
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+    /* 淡入动画 */
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 表单样式 */
+.form-container {
+    /* 表单容器 */
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.form-container:hover {
+    /* 表单容器悬停效果 */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    /* 表单组 */
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    /* 表单标签 */
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #555;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group select {
+    /* 表单输入框和选择框 */
+    width: 100%;
+    padding: 14px 20px;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    /* 表单输入框和选择框聚焦效果 */
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
+}
+
+.btn {
+    /* 按钮样式 */
+    display: inline-block;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn:hover {
+    /* 按钮悬停效果 */
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn:active {
+    /* 按钮点击效果 */
+    transform: translateY(0);
+}
+
+/* 表格样式 */
+.table-container {
+    /* 表格容器 */
+    margin-top: 30px;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.table-container:hover {
+    /* 表格容器悬停效果 */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    /* 表格 */
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+table th,
+table td {
+    /* 表格表头和单元格 */
+    padding: 18px 20px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
+
+table th {
+    /* 表格表头 */
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+table tr:hover {
+    /* 表格行悬停效果 */
+    background: #f8f9fa;
+    transition: background 0.3s ease;
+}
+
+/* 人员列表表格样式 */
+#person-table {
+    /* 人员表格 */
+    width: 100%;
+}
+
+#person-table td:nth-child(1) {
+    /* 人员姓名列 */
+    width: 150px;
+    font-weight: 500;
+}
+
+#person-table td:nth-child(2) {
+    /* 技能列 */
+    width: 250px;
+}
+
+#person-table td:nth-child(3) {
+    /* 工作时长列 */
+    width: 180px;
+}
+
+#person-table td:nth-child(4) {
+    /* 状态列 */
+    text-align: center;
+    width: 120px;
+}
+
+#person-table td:nth-child(5) {
+    /* 操作列 */
+    text-align: center;
+    width: 250px;
+}
+
+/* 任务表格样式 */
+#task-table {
+    /* 任务表格 */
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+#task-table th,
+#task-table td {
+    /* 表格表头和单元格 */
+    padding: 16px 8px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
+
+#task-table th {
+    /* 表格表头 */
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 14px;
+}
+
+#task-table th:nth-child(5),
+#task-table th:nth-child(6) {
+    /* 状态和操作表头 */
+    text-align: center;
+}
+
+#task-table td:nth-child(1) {
+    /* 任务名称列 */
+    width: 150px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#task-table td:nth-child(2) {
+    /* 任务节点列 */
+    width: 100px;
+    white-space: nowrap;
+}
+
+#task-table td:nth-child(3) {
+    /* 所需技能列 */
+    width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#task-table td:nth-child(4) {
+    /* 所需人力列 */
+    width: 80px;
+    white-space: nowrap;
+}
+
+#task-table td:nth-child(5) {
+    /* 状态列 */
+    width: 60px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+#task-table td:nth-child(6) {
+    /* 操作列 */
+    width: 80px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* 操作按钮样式 */
+.action-btn {
+    /* 操作按钮 */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    min-width: 100px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn.delete {
+    /* 删除按钮 */
+    background: #e74c3c;
+    color: white;
+}
+
+.action-btn.delete:hover {
+    /* 删除按钮悬停效果 */
+    background: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+}
+
+.action-btn.leave {
+    /* 请假按钮 */
+    background: #95a5a6;
+    color: white;
+}
+
+.action-btn.leave:hover {
+    /* 请假按钮悬停效果 */
+    background: #7f8c8d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(149, 165, 166, 0.4);
+}
+
+.action-btn.skill {
+    /* 技能按钮 */
+    background: #9b59b6;
+    color: white;
+}
+
+.action-btn.skill:hover {
+    /* 技能按钮悬停效果 */
+    background: #8e44ad;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(155, 89, 182, 0.4);
+}
+
+/* 结果容器样式 */
+.result-container {
+    /* 结果容器 */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.result-section {
+    /* 结果部分 */
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.result-section:hover {
+    /* 结果部分悬停效果 */
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.result-section h3 {
+    /* 结果部分标题 */
+    margin-top: 0;
+    color: #34495e;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 15px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.result-section table {
+    /* 结果表格 */
+    min-width: 100%;
+    border-collapse: collapse;
+}
+
+.result-section table th {
+    /* 结果表格表头 */
+    white-space: nowrap;
+    text-align: center;
+    padding: 14px 18px;
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.result-section table td {
+    /* 结果表格单元格 */
+    text-align: center;
+    padding: 14px 18px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+/* 状态样式 */
+.status-pending {
+    /* 待排状态 */
+    color: #333;
+    font-weight: bold;
+    background: #e3f2fd;
+    padding: 8px 20px;
+    border-radius: 28px;
+    font-size: 14px;
+    display: inline-block;
+    border: 1px solid #bbdefb;
+    transition: all 0.3s ease;
+}
+
+.status-pending:hover {
+    /* 待排状态悬停效果 */
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+}
+
+.status-scheduled {
+    /* 已排状态 */
+    color: #27ae60;
+    font-weight: bold;
+    background: rgba(39, 174, 96, 0.1);
+    padding: 8px 20px;
+    border-radius: 28px;
+    font-size: 14px;
+    display: inline-block;
+    border: 1px solid rgba(39, 174, 96, 0.2);
+    transition: all 0.3s ease;
+}
+
+.status-scheduled:hover {
+    /* 已排状态悬停效果 */
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2);
+}
+
+.status-leave {
+    /* 请假状态 */
+    color: #e74c3c;
+    font-weight: bold;
+    background: rgba(231, 76, 60, 0.1);
+    padding: 8px 20px;
+    border-radius: 28px;
+    font-size: 14px;
+    display: inline-block;
+    border: 1px solid rgba(231, 76, 60, 0.2);
+    transition: all 0.3s ease;
+}
+
+.status-leave:hover {
+    /* 请假状态悬停效果 */
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);
+}
+
+/* 排任务结果样式 */
+#schedule-result {
+    /* 排任务结果容器 */
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 16px;
+    margin-top: 30px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+#schedule-result:hover {
+    /* 排任务结果容器悬停效果 */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+#schedule-result h3 {
+    /* 排任务结果标题 */
+    margin-top: 0;
+    color: #34495e;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 15px;
+    font-weight: 600;
+}
+
+#schedule-result p {
+    /* 排任务结果文本 */
+    margin: 15px 0;
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* 操作栏样式 */
+.action-bar {
+    /* 操作栏容器 */
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e9ecef;
+}
+
+.action-bar .btn {
+    /* 操作栏按钮 */
+    flex: 1;
+    max-width: 200px;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    /* 中等屏幕响应式调整 */
+    .result-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .dashboard-item {
+        min-width: 200px;
+    }
+    
+    .action-bar {
+        flex-direction: column;
+    }
+    
+    .action-bar .btn {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    /* 小屏幕响应式调整 */
+    .container {
+        padding: 15px;
+    }
+    
+    .main-card {
+        border-radius: 16px;
+    }
+    
+    h1 {
+        font-size: 2.2rem;
+        padding: 30px 0;
+    }
+    
+    .tabs {
+        flex-direction: column;
+    }
+    
+    .tab-btn {
+        text-align: left;
+        border-bottom: 1px solid #e9ecef;
+        padding: 15px 20px;
+    }
+    
+    .tab-content {
+        padding: 25px;
+    }
+    
+    .form-container {
+        padding: 25px;
+    }
+    
+    .dashboard {
+        padding: 20px;
+    }
+    
+    .dashboard-item {
+        min-width: 100%;
+        margin: 0 0 15px 0;
+    }
+    
+    table th,
+    table td {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+    
+    .action-btn {
+        padding: 8px 16px;
+        font-size: 12px;
+        min-width: 80px;
+    }
+    
+    #person-table td:nth-child(5) {
+        width: 200px;
+    }
+    
+    .action-bar {
+        flex-direction: column;
+    }
+    
+    .action-bar .btn {
+        max-width: 100%;
+    }
+}
