@@ -132,6 +132,9 @@ function init() {
         scheduleTasks();
     });
     
+    // 重置排任务结果按钮点击事件
+    document.getElementById('reset-schedule-btn').addEventListener('click', resetSchedule);
+    
     // 初始化显示
     updateTaskTable();
     updatePersonTable();
@@ -316,6 +319,34 @@ function deletePerson(id) {
     saveData();
 }
 
+// 重置排任务结果
+function resetSchedule() {
+    // 重置人员工作时长
+    persons.forEach(person => {
+        person.workedHours = 0; // 重置为0小时
+    });
+    
+    // 重置任务状态
+    tasks.forEach(task => {
+        task.status = 'pending'; // 重置为待排状态
+        task.assignedPerson = null; // 重置为未分配人员
+    });
+    
+    // 清空已排任务列表
+    scheduledTasks = [];
+    
+    // 更新显示
+    updateTaskTable();
+    updatePersonTable();
+    updateDashboard();
+    
+    // 清空排任务结果显示
+    document.getElementById('schedule-result').innerHTML = '';
+    
+    // 提示用户
+    alert('排任务结果已重置');
+}
+
 // 排任务
 function scheduleTasks() {
     // 获取排任务日期
@@ -353,8 +384,30 @@ function scheduleTasks() {
         });
         
         if (suitablePersons.length > 0) {
-            // 选择工作时长最少的人员
-            const selectedPerson = suitablePersons.sort((a, b) => a.workedHours - b.workedHours)[0];
+            // 技能匹配度计算函数：计算人员技能与任务技能的匹配度
+            function calculateSkillMatch(person, task) {
+                // 计算人员技能与任务技能的交集
+                const matchedSkills = person.skills.filter(skill => task.skills.includes(skill));
+                // 计算匹配度：匹配技能数 / 人员总技能数
+                // 这样，技能越少的人员匹配度越高
+                return matchedSkills.length / person.skills.length;
+            }
+            
+            // 排序逻辑：
+            // 1. 首先按技能匹配度降序排序（技能匹配度越高越优先）
+            // 2. 然后按工作时长升序排序（工作时长越少越优先）
+            const selectedPerson = suitablePersons.sort((a, b) => {
+                // 计算技能匹配度
+                const matchA = calculateSkillMatch(a, task);
+                const matchB = calculateSkillMatch(b, task);
+                
+                // 首先比较技能匹配度
+                if (matchA !== matchB) {
+                    return matchB - matchA; // 匹配度高的优先
+                }
+                // 如果技能匹配度相同，比较工作时长
+                return a.workedHours - b.workedHours; // 工作时长少的优先
+            })[0];
             
             // 分配任务
             task.status = 'scheduled'; // 标记为已排状态
